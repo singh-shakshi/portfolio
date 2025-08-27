@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Shakshi Singh — Portfolio</title>
+  <meta name="description" content="Portfolio of BCA student and aspiring Data Analyst: projects, skills, resume, and contact." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b1020;      /* dark */
+      --card: #121833;
+      --text: #e8ecff;
+      --muted: #b6c0ff;
+      --brand: #6aa7ff;
+      --brand-2: #9d7bff;
+      --ring: rgba(106, 167, 255, .5);
+      --light-bg: #ffffff; /* light */
+      --light-text: #0f172a;
+      --light-muted: #475569;
+      --light-card: #f1f5f9;
+      --shadow: 0 10px 30px rgba(0,0,0,.25), 0 2px 6px rgba(0,0,0,.15);
+    }
+
+    /* Light mode (will be toggled by JS) */
+    .light {
+      --bg: var(--light-bg);
+      --text: var(--light-text);
+      --muted: var(--light-muted);
+      --card: var(--light-card);
+    }
+
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif;
+      background: radial-gradient(1200px 600px at 80% -10%, rgba(109, 143, 255, 0.15), transparent 50%),
+                  radial-gradient(1000px 400px at -10% 20%, rgba(189, 109, 255, 0.12), transparent 50%),
+                  var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      scroll-behavior: smooth;
+    }
+
+    a { color: var(--brand); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .container { width: min(1100px, 92%); margin: 0 auto; }
+
+    /* Navbar */
+    .nav {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: blur(10px);
+      background: color-mix(in oklab, var(--bg) 85%, transparent);
+      border-bottom: 1px solid color-mix(in oklab, var(--text) 12%, transparent);
+    }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; }
+    .brand { display:flex; align-items:center; gap:10px; font-weight:700; letter-spacing:.3px; }
+    .brand .dot { width:10px; height:10px; border-radius:50%; background:linear-gradient(135deg,var(--brand), var(--brand-2)); box-shadow:0 0 0 4px rgba(106,167,255,.15); }
+    .nav a { font-weight: 500; }
+    .nav-links { display:flex; align-items:center; gap:22px; }
+
+    .btn {
+      display:inline-flex; align-items:center; gap:10px; font-weight:600; border-radius:14px; padding:10px 16px;
+      background: linear-gradient(135deg, color-mix(in oklab, var(--brand) 80%, white 0%), color-mix(in oklab, var(--brand-2) 80%, white 0%));
+      color: white; border: none; box-shadow: var(--shadow); cursor: pointer;
+    }
+    .btn:focus { outline: 3px solid var(--ring); outline-offset: 2px; }
+    .ghost { background: transparent; border:1px solid color-mix(in oklab, var(--text) 15%, transparent); color: var(--text); box-shadow:none; }
+
+    /* Hero */
+    .hero { padding: 80px 0 40px; display:grid; grid-template-columns: 1.2fr .8fr; gap: 30px; align-items: center; }
+    .tag { display:inline-flex; align-items:center; gap:8px; background: color-mix(in oklab, var(--card) 70%, transparent); border:1px solid color-mix(in oklab, var(--text) 12%, transparent); padding:6px 12px; border-radius:999px; font-size:12px; color: var(--muted); }
+    h1 { font-size: clamp(30px, 4.5vw, 50px); line-height:1.15; margin: 10px 0 14px; }
+    .lead { font-size: 17px; color: var(--muted); }
+    .hero-cta { display:flex; gap:12px; margin-top:22px; flex-wrap: wrap; }
+
+    .pfp { width: 230px; aspect-ratio:1; border-radius: 26px; background: linear-gradient(135deg, var(--brand), transparent 60%), url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=600&auto=format&fit=crop') center/cover no-repeat; box-shadow: var(--shadow); border: 1px solid color-mix(in oklab, var(--text) 12%, transparent); }
+    .hero-card { background: var(--card); border-radius: 24px; padding: 20px; border:1px solid color-mix(in oklab, var(--text) 12%, transparent); display:flex; gap:16px; align-items:center; }
+    .hero-grid { display:grid; grid-template-columns: 1fr; gap:16px; }
+
+    /* Sections */
+    section { padding: 60px 0; }
+    .section-title { font-size: 26px; margin-bottom: 8px; }
+    .section-sub { color: var(--muted); margin-bottom: 24px; }
+
+    /* Cards grid */
+    .grid { display:grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .card { background: var(--card); border:1px solid color-mix(in oklab, var(--text) 12%, transparent); border-radius: 18px; padding: 18px; box-shadow: var(--shadow); transition: transform .15s ease; }
+    .card:hover { transform: translateY(-2px); }
+    .card h3 { margin: 6px 0 4px; font-size: 18px; }
+    .chip { display:inline-block; font-size: 12px; padding: 4px 10px; border-radius: 999px; background: color-mix(in oklab, var(--bg) 70%, transparent); border:1px solid color-mix(in oklab, var(--text) 12%, transparent); color: var(--muted); margin-right:6px; margin-bottom:6px; }
+
+    /* Timeline */
+    .timeline { border-left:2px dashed color-mix(in oklab, var(--text) 20%, transparent); padding-left: 14px; }
+    .timeline-item { margin-bottom: 18px; }
+    .timeline-item h4 { margin:0; }
+    .small { color: var(--muted); font-size: 14px; }
+
+    /* Footer */
+    footer { border-top: 1px solid color-mix(in oklab, var(--text) 10%, transparent); padding: 26px 0 60px; color: var(--muted); }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+      .pfp { width: 160px; }
+      .grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 620px) {
+      .grid { grid-template-columns: 1fr; }
+      .nav-links { display:none; }
+    }
+  </style>
+</head>
+<body>
+  <!-- NAVBAR -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <div class="brand">
+        <span class="dot"></span>
+        <a href="#home" style="color:inherit; text-decoration:none;">Shakshi Singh</a>
+      </div>
+      <div class="nav-links">
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#education">Education</a>
+        <a href="#achievements">Achievements</a>
+        <a href="#contact">Contact</a>
+        <button class="btn ghost" id="themeToggle" aria-label="Toggle theme">🌙</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header id="home" class="hero container">
+    <div>
+      <span class="tag">📍 Prayagraj • Open to Internships</span>
+      <h1>Hello, I'm Shakshi — BCA (3rd Sem) • Aspiring Data Analyst</h1>
+      <p class="lead">I solve real problems with Python, SQL, and Excel. Currently building data projects and preparing for placements, and NIMCET. I love clean dashboards, reproducible notebooks, and measurable impact.</p>
+      <div class="hero-cta">
+        <a class="btn" href="#projects">View Projects</a>
+        <a class="btn ghost" href="assets/Resume_Shakshi_Singh.pdf" download>Download Resume</a>
+        <a class="btn ghost" href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn ghost" href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+    <div class="hero-grid">
+      <div class="hero-card">
+        <div class="pfp" aria-hidden="true"></div>
+        <div>
+          <strong>About me</strong>
+          <p class="small">Data-curious student with a knack for patterns. Looking for entry-level roles: Data Analyst, Business Analyst, or Reporting Intern.</p>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div>
+          <strong>Quick Highlights</strong>
+          <p class="small">• 🧮 SQL (joins, CTEs, window fns) • 📊 Excel (Pivot, Power Query) • 🐍 Python (Pandas, Matplotlib) • 🧠 DSA basics • 📜 NIMCET & CGL prep</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="container">
+    <h2 class="section-title">Projects</h2>
+    <p class="section-sub">A few things I’ve built recently. (More on GitHub)</p>
+    <div class="grid">
+      <article class="card">
+        <span class="chip">Python</span><span class="chip">Pandas</span><span class="chip">EDA</span>
+        <h3>Retail Sales EDA</h3>
+        <p class="small">Exploratory analysis on 12 months of store sales. Built cohort charts, seasonality, and RFM segmentation for targeting.</p>
+        <p class="small"><a href="#" target="_blank">Repo</a> • <a href="#" target="_blank">Notebook</a></p>
+      </article>
+      <article class="card">
+        <span class="chip">SQL</span><span class="chip">PostgreSQL</span>
+        <h3>HR Analytics — SQL Playbook</h3>
+        <p class="small">50+ interview-style SQL queries on attrition, hiring funnel, and compensation using CTEs & window functions.</p>
+        <p class="small"><a href="#" target="_blank">Repo</a></p>
+      </article>
+      <article class="card">
+        <span class="chip">Excel</span><span class="chip">Dashboard</span>
+        <h3>Sales KPI Dashboard</h3>
+        <p class="small">Interactive dashboard with slicers and Power Query. Shows revenue by region, product mix, and monthly trends.</p>
+        <p class="small"><a href="#" target="_blank">Download</a></p>
+      </article>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="container">
+    <h2 class="section-title">Skills</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Data</h3>
+        <p class="small">Python (Pandas, NumPy, Matplotlib), SQL (joins, window functions), Excel (Pivot, VLOOKUP/XLOOKUP, Power Query), Statistics (descriptive, hypothesis testing)</p>
+      </div>
+      <div class="card">
+        <h3>Software & Tools</h3>
+        <p class="small">Jupyter, VS Code, Git/GitHub, PostgreSQL/MySQL, Google Sheets, Power BI (basics)</p>
+      </div>
+      <div class="card">
+        <h3>CS Foundations</h3>
+        <p class="small">OOP in Python/Java (basics), DSA fundamentals, OS & DBMS basics</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION & EXPERIENCE -->
+  <section id="education" class="container">
+    <h2 class="section-title">Education</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <h4>BCA — United University, Prayagraj <span class="small">(2023–2026)</span></h4>
+        <p class="small">Current CGPA: 8.0 (update). Relevant Coursework: DBMS, DSA, OOP, Statistics.</p>
+      </div>
+      <div class="timeline-item">
+        <h4>Class XII (CBSE) — PCM <span class="small">(2022)</span></h4>
+        <p class="small">Percentage: 85% (update)</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACHIEVEMENTS -->
+  <section id="achievements" class="container">
+    <h2 class="section-title">Achievements</h2>
+    <div class="grid">
+      <div class="card"><h3>SQL Case Study Winner</h3><p class="small">Won college analytics hackathon; optimized queries 40% faster.</p></div>
+      <div class="card"><h3>Excel Ninja</h3><p class="small">Automated monthly reporting, saving ~4 hrs/week.</p></div>
+      <div class="card"><h3>100 Days of Code</h3><p class="small">Completed Python + SQL streak and documented learning.</p></div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="container">
+    <h2 class="section-title">Contact</h2>
+    <p class="section-sub">Want to discuss an internship, freelance work, or collaboration? Reach out.</p>
+    <form class="card" action="https://formspree.io/f/your-form-id" method="POST">
+      <label class="small" for="name">Name</label>
+      <input required id="name" name="name" placeholder="Your name" style="margin-top:6px;margin-bottom:12px;padding:12px;border-radius:12px;border:1px solid color-mix(in oklab, var(--text) 15%, transparent); width:100%; background:transparent; color:var(--text)">
+      <label class="small" for="email">Email</label>
+      <input required id="email" name="email" type="email" placeholder="you@example.com" style="margin-top:6px;margin-bottom:12px;padding:12px;border-radius:12px;border:1px solid color-mix(in oklab, var(--text) 15%, transparent); width:100%; background:transparent; color:var(--text)">
+      <label class="small" for="message">Message</label>
+      <textarea required id="message" name="message" rows="5" placeholder="Write your message..." style="margin-top:6px;margin-bottom:16px;padding:12px;border-radius:12px;border:1px solid color-mix(in oklab, var(--text) 15%, transparent); width:100%; background:transparent; color:var(--text)"></textarea>
+      <button class="btn" type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>© <span id="year"></span> Shakshi Singh. Built with ♥ using HTML, CSS & JS. <a href="#home">Back to top ↑</a></p>
+    </div>
+  </footer>
+
+  <script>
+    // ——— Theme Toggle with localStorage ———
+    const root = document.documentElement;
+    const toggle = document.getElementById('themeToggle');
+    const stored = localStorage.getItem('theme');
+    if (stored === 'light') document.body.classList.add('light');
+    toggle.addEventListener('click', () => {
+      document.body.classList.toggle('light');
+      localStorage.setItem('theme', document.body.classList.contains('light') ? 'light' : 'dark');
+      toggle.textContent = document.body.classList.contains('light') ? '🌞' : '🌙';
+    });
+    toggle.textContent = document.body.classList.contains('light') ? '🌞' : '🌙';
+
+    // ——— Current Year ———
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // ——— Smooth anchor offset for sticky nav (optional) ———
+    const navHeight = document.querySelector('.nav').offsetHeight;
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const id = a.getAttribute('href');
+        if (id.length > 1) {
+          e.preventDefault();
+          const el = document.querySelector(id);
+          const y = el.getBoundingClientRect().top + window.scrollY - (navHeight + 10);
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
